@@ -26,10 +26,6 @@ public class Main {
 //		System.out.println(dback11.getName()+":"+vModex102.get(0));
 			
 		FlightPlan2 dplan11 = new FlightPlan2();
-			
-		dplan11.gconvertAndAdd(dplan11.FP);
-//		dback11.calculateFuelUsage(dback11,2);
-		dplan11.displayFlightPlans();
 		
 
 			

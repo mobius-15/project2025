@@ -19,7 +19,7 @@ public abstract class Aircrafts {
 	int altitude,distance;
 
 	static final double ρ0=1.225;//海面上での標準大気密度(kg/m3)
-	static double ρρ0;
+	double ρρ0;
 //	FlightPlan distance;
 	double sfc;
 	private boolean weaponized;
@@ -177,7 +177,7 @@ public abstract class Aircrafts {
 	       return Math.exp(-altitude / 10000); // 1万フィートごとにおよそ63%減少
 	}
 
-	 public double calculateTAS() {
+	 public int calculateTAS() {
 	        ρρ0 = calculateDensityRatio(this.altitude);
 	        this.tas=(int)(cas*(1/Math.sqrt(ρρ0)));
 	        return  tas;// 真対気速度 (TAS) 計算

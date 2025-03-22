@@ -40,10 +40,11 @@ public class TestPlan extends HttpServlet {
 		
 		HttpSession session=request.getSession();
 		
-		session.setAttribute("wayPoint", wayPoint);
-		request.setAttribute("wayPoint", wayPoint);
 		session.setAttribute("missionType", missionType);
 		request.setAttribute("missionType", missionType);
+		session.setAttribute("wayPoint", wayPoint);
+		request.setAttribute("wayPoint", wayPoint);
+
 		
 		RequestDispatcher dispatcher
 		 =request.getRequestDispatcher("WEB-INF/jsp/Planning.jsp");
@@ -58,24 +59,20 @@ public class TestPlan extends HttpServlet {
 		 FlightPlan2 plan= new FlightPlan2();
 		 List<Waypoint>waypoints=new ArrayList<>();
 		 
-		 double totalFlightTime = 0;
+		 	double totalFlightTime = 0;
 
 			for(int i=0;i<wayPoint;i++) {
 				
-//	            String altitudeStr = request.getParameter("altitude" + i);
-//	            String speedStr = request.getParameter("cas" + i);
-//	            String distanceStr = request.getParameter("distance" + i);
-//	            String headingStr = request.getParameter("heading" + i);
-				
 		           int altitude = Integer.parseInt(request.getParameter("altitude" + i));
-		            int speed = Integer.parseInt(request.getParameter("cas" + i));
+		            int cas = Integer.parseInt(request.getParameter("cas" + i));
 		            double distance = Double.parseDouble(request.getParameter("distance" + i));
 		            int heading = Integer.parseInt(request.getParameter("heading" + i));
 				
-				double segmentTime=(distance*3600)/speed;
+		        double tas=plan.convertTAS(altitude,cas);  
+				double segmentTime=(distance*3600)/cas;
 				totalFlightTime += segmentTime;
 				
-				waypoints.add(new Waypoint(0,0,altitude,speed,distance,heading,segmentTime));
+				waypoints.add(new Waypoint(0,0,altitude,(int)tas,distance,heading,segmentTime));
 			}
 			plan.setWaypoints(waypoints);
 			

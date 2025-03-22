@@ -14,7 +14,7 @@
 <title>FlightPlanner</title>
 </head>
 <body>
- <h2>Mission:<%= request.getAttribute("mission") %></h2>
+ <h2>Mission:<%= missionType %></h2>
  <h3>Details</h3>
  <ul>
  <li>Aircraft:<%= fa18f.getName() %></li>

@@ -7,6 +7,7 @@ public class FA_18 extends Aircrafts{
 		private double remainingFuel;
 		private int a_bThrust;
 		private int totalFuel;
+		int nTank;
 		Random random=new Random();
 
  public FA_18() {
@@ -22,6 +23,7 @@ public class FA_18 extends Aircrafts{
 			setFullWeight(50200);
 			this.a_bThrust=17700;
 			setWeaponized(true);
+			setnTank(1);
 		}
 		public int rateOfClimb(int ceilingAlt) {
 			return getCeilingAlt()/10;
@@ -72,5 +74,11 @@ public class FA_18 extends Aircrafts{
 	    public double getRemainingFuel() {
 	        return remainingFuel;
 	    }
+		public int getnTank() {
+			return nTank;
+		}
+		public void setnTank(int nTank) {
+			this.nTank = nTank;
+		}
 	}
 

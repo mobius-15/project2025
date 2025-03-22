@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="aircrafts.*" %>
     <% FA_18 fa18=(FA_18)session.getAttribute("fa18"); %>
-    <%  int totalFuel = aircraft.getIntFuel()+(FA_18.getExtFuel()*nTank); %>
+    <%  int totalFuel = fa18.getIntFuel()+(FA_18.getExtFuel()*fa18.getnTank()); %>
 <!DOCTYPE html>
 <html>
 <head>

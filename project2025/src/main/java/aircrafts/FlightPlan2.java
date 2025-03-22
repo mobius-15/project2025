@@ -17,9 +17,23 @@ public class FlightPlan2 extends Aircrafts{
     private static final String PASSWORD = "qq3g9yp"; 
 
 	public static  Connection getConnection() throws SQLException  {
+	try {	  Class.forName("com.mysql.cj.jdbc.Driver");
+    } catch (ClassNotFoundException e) {
+        System.err.println("MySQL JDBC Driver not found.");
+        e.printStackTrace();
+    }
 
 		return DriverManager.getConnection(URL,USER,PASSWORD);
 		
+	}
+	public double convertTAS(int altitude,int cas) {
+		double densityRatio=1.0;
+		try(Connection conn=getConnection()){
+			densityRatio=getDataBase(conn,altitude);
+		}catch(SQLException e) {
+			System.err.println("SQLError: " + e.getMessage());
+		}
+		return cas / Math.sqrt(densityRatio);
 	}
 	public void specify (int wayPoint,double startLat,double startLon){
 				
@@ -40,25 +54,30 @@ public class FlightPlan2 extends Aircrafts{
 		}
 		
 	}
-		public List<Waypoint>getWaypoints(){
-			return waypoints;
-	}
+
 	private double getDataBase(Connection conn,int altitude)throws SQLException {
-		StringBuilder sql=new StringBuilder();
-		sql.append("SELECT density_ratio FROM altitude LEFT JOIN density ON altitude.id=density.id ")
-		.append("WHERE feet = (SELECT feet FROM altitude WHERE feet <= ? ORDER BY ABS(feet - ?) LIMIT 1) ");
+//		StringBuilder sql=new StringBuilder();
+//		sql.append("SELECT density_ratio FROM altitude LEFT JOIN density ON altitude.id=density.id ")
+//		.append("WHERE feet = (SELECT feet FROM altitude WHERE feet <= ? ORDER BY ABS(feet - ?) LIMIT 1) ");
+		   String sql = "SELECT density_ratio FROM altitude " +
+	                 "LEFT JOIN density ON altitude.id = density.id " +
+	                 "WHERE feet >= ? ORDER BY feet ASC LIMIT 1";
+
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
 			pstmt.setInt(1,altitude);
-			pstmt.setInt(2,altitude);
+//			pstmt.setInt(2,altitude);
 			ResultSet rs=pstmt.executeQuery();
 		
 			if(rs.next()){return rs.getDouble("density_ratio");
-			}else {	System.err.println("取得できず"); 
+			}else {	System.err.println("NOT FOUND"); 
 			return super.ρρ0;}
 		}
 	    
 	}
+	public List<Waypoint>getWaypoints(){
+		return waypoints;
+}
 	public void setWaypoints(List<Waypoint> waypoints) {
 		this.waypoints = waypoints;
 	}

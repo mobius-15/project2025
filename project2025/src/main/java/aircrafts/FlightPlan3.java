@@ -45,7 +45,7 @@ public class FlightPlan3 extends HttpServlet {
 		Math.min(wayPoint,20);
 		int[][]sa=new int[wayPoint][3];
 		
-		for(int s=0;s<sa.length;s++) {Aircrafts.wpCount++;
+		for(int s=0;s<sa.length;s++) {
 			sa[s][0]=Math.max(100, Math.min(50000,Integer.parseInt(request.getParameter("altitude"))));
 			
 			

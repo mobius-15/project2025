@@ -19,7 +19,7 @@ public abstract class Aircrafts {
 	int altitude,distance;
 
 	static final double ρ0=1.225;//海面上での標準大気密度(kg/m3)
-	double ρρ0;
+	static double ρρ0;
 //	FlightPlan distance;
 	double sfc;
 	private boolean weaponized;

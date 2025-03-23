@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,java.util.Iterator,java.util.Map,java.util.HashMap" %>
+<%@ page import="java.util.*" %>
 <%@ page import="aircrafts.*" %>
 <% List<Waypoint>waypoints=(List<Waypoint>)request.getAttribute("waypoints");
-	HashMap<String,FA_18F> squadron=(HashMap<String,FA_18F>)request.getAttribute("squadron");
-  FA_18F fa18f=(FA_18F)request.getAttribute("fa18f");
-  String missionType = (String)request.getAttribute("missionType");
+	TreeMap<String,FA_18F> squadron=(TreeMap<String,FA_18F>)request.getAttribute("squadron");
+  FA_18F fa18f=(FA_18F)session.getAttribute("fa18f");
+  String missionType = (String)session.getAttribute("missionType");
   double totalFlightTime=(double)request.getAttribute("totalFlightTime");%>
 <!DOCTYPE html>
 <html>
@@ -55,14 +55,14 @@
   <h3>Squadron:VFA-102</h3>
   <table border="1">
   <tr>
-  <th>Aircraft</th>
-  <th>Type</th>
+  <th>Aircraft_Modex</th>
+  <th>Aircraft_Type</th>
   <th>Fuel(lb)</th>
   </tr>
   <% for(Map.Entry<String,FA_18F>entry:squadron.entrySet()) {%>
   <tr>
   <td><%= entry.getKey() %></td>
-  <td><%= entry.getValue().getType() %></td>
+  <td><%= entry.getValue().getName() %></td>
   <td><%= entry.getValue().getIntFuel()+(FA_18F.getExtFuel()*2) %>lb</td>
   </tr>
   <% } %>

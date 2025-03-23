@@ -6,6 +6,8 @@ public class FA_18E extends FA_18 {
 		super();
 		setName("F/A-18E");
 		setIntFuel(14480);
+		setCombatRange(660);
+		setFerryRange(1660);
 		}
 
 }

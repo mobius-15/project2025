@@ -2,8 +2,8 @@ package aircrafts;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -41,9 +41,9 @@ public class TestPlan extends HttpServlet {
 		HttpSession session=request.getSession();
 		
 		session.setAttribute("missionType", missionType);
-		request.setAttribute("missionType", missionType);
+//		request.setAttribute("missionType", missionType);
 		session.setAttribute("wayPoint", wayPoint);
-		request.setAttribute("wayPoint", wayPoint);
+//		request.setAttribute("wayPoint", wayPoint);
 
 		
 		RequestDispatcher dispatcher
@@ -53,7 +53,7 @@ public class TestPlan extends HttpServlet {
 		}
 		if("submit_wp".equals(action)) {
 			HttpSession session=request.getSession();
-			String missionType=request.getParameter("missionType");		
+//			String missionType=request.getParameter("missionType");		
 			int wayPoint=Integer.parseInt(request.getParameter("wayPoint"));
 		
 		 FlightPlan2 plan= new FlightPlan2();
@@ -76,8 +76,8 @@ public class TestPlan extends HttpServlet {
 			}
 			plan.setWaypoints(waypoints);
 			
-			HashMap<String,FA_18F>vfa102 = Hanger.vfa102();
-			FA_18F fa18f= vfa102.get("NF103");
+			TreeMap<String,FA_18F>vfa102 = Hanger.vfa102();
+			FA_18F fa18f= vfa102.get("NF100");
 			if(fa18f != null) {
 			fa18f.setExtFuel(3300);
 			fa18f.calculateFuelUsage(waypoints,2);
@@ -85,11 +85,11 @@ public class TestPlan extends HttpServlet {
 			session.setAttribute("flightplan",plan);
 			session.setAttribute("fa18f",fa18f);
 			session.setAttribute("squadron", vfa102);
-			request.setAttribute("fa18f",fa18f);
-			request.setAttribute("totalFlightTime", totalFlightTime);
+//			request.setAttribute("fa18f",fa18f);
+//			request.setAttribute("totalFlightTime", totalFlightTime);
 			session.setAttribute("waypoints", waypoints);
-			request.setAttribute("waypoints", waypoints);
-			request.setAttribute("squadron", vfa102);
+//			request.setAttribute("waypoints", waypoints);
+//			request.setAttribute("squadron", vfa102);
 		 
 		 RequestDispatcher dispatcher
 		 =request.getRequestDispatcher("WEB-INF/jsp/FlightPlanner.jsp");

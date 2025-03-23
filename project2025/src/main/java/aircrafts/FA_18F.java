@@ -7,5 +7,6 @@ public class FA_18F extends FA_18E {
 		super();
 		setName("F/A-18F");
 		setIntfuel(13550);
+
 	}
 }

@@ -16,7 +16,7 @@ public class FlightPlan2 extends Aircrafts{
     private static final String USER = "root"; 
     private static final String PASSWORD = "qq3g9yp"; 
 
-	public static  Connection getConnection() throws SQLException  {
+public static  Connection getConnection() throws SQLException  {
 	try {	  Class.forName("com.mysql.cj.jdbc.Driver");
     } catch (ClassNotFoundException e) {
         System.err.println("MySQL JDBC Driver not found.");
@@ -26,7 +26,7 @@ public class FlightPlan2 extends Aircrafts{
 		return DriverManager.getConnection(URL,USER,PASSWORD);
 		
 	}
-	public double convertTAS(int altitude,int cas) {
+public double convertTAS(int altitude,int cas) {
 		double densityRatio=1.0;
 		try(Connection conn=getConnection()){
 			densityRatio=getDataBase(conn,altitude);
@@ -35,7 +35,7 @@ public class FlightPlan2 extends Aircrafts{
 		}
 		return cas / Math.sqrt(densityRatio);
 	}
-	public void specify (int wayPoint,double startLat,double startLon){
+public void specify (int wayPoint,double startLat,double startLon){
 				
 		try(Connection conn=getConnection()) {
 			waypoints.add(Waypoint.createStartPoint(startLat, startLon, 35000, 450));

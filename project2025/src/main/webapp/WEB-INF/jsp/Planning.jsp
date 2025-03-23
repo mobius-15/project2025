@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-  <%@ page import="aircrafts.FlightPlan2,aircrafts.Waypoint" %>
+  <%@ page import="aircrafts.*" %>
     <% FlightPlan2 plan = (FlightPlan2)session.getAttribute("flightplan"); 
     int wayPoint = (Integer) session.getAttribute("wayPoint");
     String missionType = (String) session.getAttribute("missionType");

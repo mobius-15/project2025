@@ -42,7 +42,7 @@ public class FA_18 extends Aircrafts{
 		               double fuelUsed;
 		               
 	if(wp.getAltitude()>(i==0 ? 0:waypoints.get(i-1).getAltitude())) {
-		       afterBurner();
+//		       afterBurner();
 		    fuelUsed =(fuel()+climbingFF())*timeHours;
 		  }else {
 		      fuelUsed=fuel()*timeHours;

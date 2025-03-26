@@ -1,7 +1,8 @@
 package aircrafts;
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Aircrafts {
+public abstract class Aircrafts implements Serializable{
 	private String name,type;
 	String mission;
 	private int nEngine;
@@ -19,7 +20,7 @@ public abstract class Aircrafts {
 	int altitude,distance;
 
 	static final double ρ0=1.225;//海面上での標準大気密度(kg/m3)
-	static double ρρ0;
+	double ρρ0;
 //	FlightPlan distance;
 	double sfc;
 	private boolean weaponized;

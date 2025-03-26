@@ -51,7 +51,7 @@ public class FlightPlan3 extends HttpServlet {
 			
 			int cas=Math.max(130, Math.min(1000,Integer.parseInt(request.getParameter("cas"))));
 			
-			sa[s][1]=(int)(cas*(1/Math.sqrt(Aircrafts.ρρ0)));
+//			sa[s][1]=(int)(cas*(1/Math.sqrt(Aircrafts.ρρ0)));
 			
 			sa[s][2]=Math.max(5, Math.min(300, Integer.parseInt(request.getParameter("distance"))));
 			

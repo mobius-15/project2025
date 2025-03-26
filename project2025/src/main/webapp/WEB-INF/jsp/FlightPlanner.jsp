@@ -4,9 +4,12 @@
 <%@ page import="aircrafts.*" %>
 <% List<Waypoint>waypoints=(List<Waypoint>)request.getAttribute("waypoints");
 	TreeMap<String,FA_18F> squadron=(TreeMap<String,FA_18F>)request.getAttribute("squadron");
+	List<Double> segmentFuelList = (List<Double>) request.getAttribute("segmentFuelList");
   FA_18F fa18f=(FA_18F)session.getAttribute("fa18f");
   String missionType = (String)session.getAttribute("missionType");
-  double totalFlightTime=(double)request.getAttribute("totalFlightTime");%>
+  double totalFlightTime=(double)request.getAttribute("totalFlightTime");
+    Integer capIndex = (Integer) request.getAttribute("capIndex");
+  Integer capDuration = (Integer) request.getAttribute("capDuration");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,9 +38,12 @@
             <th>Distance (nm)</th>
             <th>Heading (°)</th>
             <th>Flight Time</th>
+            <th>Fuel Used</th>
+            <th>CAP</th>
         </tr>
       <%  for (int i = 0; i < waypoints.size(); i++) { 
           Waypoint wp = waypoints.get(i);
+          double fuel = segmentFuelList.get(i);
           int minutes =(int)(wp.getSegmentTime()/60);
           int seconds =(int)(wp.getSegmentTime()%60);
           %>
@@ -48,6 +54,13 @@
             <td><%= wp.getDistance() %></td>
             <td><%= wp.getHeading() %></td>
             <td><%= minutes %> min<%= seconds %> sec</td>
+            <td><%= String.format("%.1f", segmentFuelList.get(i)) %> lb</td>
+<td>
+  <% if (capIndex != null && i == capIndex) { %>
+    CAP
+  <% } %>
+</td>
+            
         </tr>
         <% } %>
     </table>
@@ -58,6 +71,7 @@
   <th>Aircraft_Modex</th>
   <th>Aircraft_Type</th>
   <th>Fuel(lb)</th>
+  
   </tr>
   <% for(Map.Entry<String,FA_18F>entry:squadron.entrySet()) {%>
   <tr>
@@ -67,6 +81,15 @@
   </tr>
   <% } %>
   </table> 
+<table>
+  <% 
+
+  if (capIndex != null && capDuration != null) {
+%>
+
+  <p><strong>CAP executed at WP <%= capIndex + 1 %> for <%= capDuration %> minutes</strong></p>
+<% } %>
+</table>
     <%
     int totalMinutes = (int) (totalFlightTime / 60);
     int totalSeconds = (int) (totalFlightTime % 60);

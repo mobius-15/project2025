@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 public class FA_18 extends Aircrafts{	
-		private static int extFuel;
+		private  int extFuel;
 		private double remainingFuel;
 		private int a_bThrust;
 		private int totalFuel;
@@ -98,12 +98,12 @@ public class FA_18 extends Aircrafts{
 
 	    return orbit(radiusNm, orbitTimeMin, throttle);
 	}
-	    public static int getExtFuel() {
+	    public  int getExtFuel() {
 	        return extFuel;
 	    }
 
 	    public void setExtFuel(int extFuel) {
-	        FA_18.extFuel = extFuel;
+	        this.extFuel = extFuel;
 	    }
 
 	    // **残燃料取得**

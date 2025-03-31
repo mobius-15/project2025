@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-  <%@ page import="aircrafts.*" %>
-    <% FlightPlan2 plan = (FlightPlan2)session.getAttribute("flightplan"); 
-    int wayPoint = (Integer) session.getAttribute("wayPoint");
-    String missionType = (String) session.getAttribute("missionType");
-    if(missionType==null)missionType="";%>
+    <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+ 
     
 <!DOCTYPE html>
 <html>
@@ -13,30 +10,44 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>Mission: <%= missionType %></h2>
+	<h2>Mission:<c:out value="${sessionScope.missionType }" /></h2>
        <form action="TestPlan" method="post">
        <input type="hidden" name="action" value="submit_wp">
-        <input type="hidden" name="missionType" value="<%= missionType %>">
-        <input type="hidden" name="wayPoint" value="<%= wayPoint %>">
+        <input type="hidden" name="missionType" value="${sessionScope.missionType}">
+        <input type="hidden" name="wayPoint" value="${sessionScope.wayPoint}">
         
-        <% for (int i = 0; i < wayPoint; i++) { %>
-            <h3>WP <%= i + 1 %></h3>
+       
+        <c:forEach var="i" begin="0" end="${sessionScope.wayPoint -1}">
+            <h3>WP ${i+1}</h3>
             <p>Altitude (feet)</p>
-            <input type="number" name="altitude<%= i %>" required>
+            <input type="number" name="altitude${i}" required>
 
             <p>Speed (CAS knots)</p>
-            <input type="number" name="cas<%= i %>" required>
+            <input type="number" name="cas${i}" required>
 
             <p>WP Distance (nm)</p>
-            <input type="number" name="distance<%= i %>" required>
+            <input type="number" name="distance${i}" required>
             
              <label>Heading (0-360°):</label>
-            <input type="number" name="heading<%= i %>" min="0" max="360" required><br>
-        <% } %>
+            <input type="number" name="heading${i}" min="0" max="360" required><br>
+       
+        </c:forEach>
+
+    <h3>CAP Configuration</h3>
+<p>Select CAP Waypoint and Duration:</p>
+<label>CAP at WP:</label>
+<select name="capIndex">
+<c:forEach begin="0" end="${sessionScope.wayPoint -1 }" var="i">
+  
+     <option value="${i}">WP ${i+1}</option>
+   </c:forEach>
+</select>
+
+<label>Duration (minutes):</label>
+<input type="number" name="capDuration" min="1" max="60" value="15">
           <button type="submit">Submit</button>
 
     </form>
-
 
 </body>
 </html>

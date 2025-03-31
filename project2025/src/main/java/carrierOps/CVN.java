@@ -1,15 +1,22 @@
 package carrierOps;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class CVN extends Vessels implements Fleet{
 Fleet cvn;			
-	public CVN(HashMap<Integer,String>cvn) {
+private double latitude;
+private double longitude;
+private int speed;
+private int cats;
+	public CVN(TreeMap<Integer,String>cvn,double lat,double lon,int speed,int displacement) {
 		setName(cvn.get(5));
-//		setName();
+		
 		setPower(260000);
 		setBasicPlacement(85000);
-		 int cats;
+		setCats(4);
+        
+        
+		 
 	}
 	public void reactor() {
 		
@@ -23,7 +30,29 @@ Fleet cvn;
 	public void defense() {
 		
 	}
-	public int direction() {
-		return 180;
+	public double getLatitude() {
+		return latitude;
 	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public int getSpeed() {
+		return speed;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	public int getCats() {
+		return cats;
+	}
+	public void setCats(int cats) {
+		this.cats = cats;
+	}
+
 }

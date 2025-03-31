@@ -1,9 +1,9 @@
 package carrierOps;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class DDG extends Vessels{
-	public DDG(HashMap<Integer,String>ddg) {
+	public DDG(TreeMap<Integer, String> treeMap) {
 		setName("John_Mccain");
 	}
 			

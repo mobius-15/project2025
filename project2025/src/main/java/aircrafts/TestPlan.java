@@ -1,6 +1,7 @@
 package aircrafts;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -30,7 +31,6 @@ public class TestPlan extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		
 		HttpSession session=request.getSession();
@@ -65,20 +65,23 @@ public class TestPlan extends HttpServlet {
 				
 		        double tas=plan.convertTAS(altitude,cas);  
 				double segmentTime=(distance*3600)/tas;
-				totalFlightTime += segmentTime;
+				
+				FlightPlan2.AtmosphereData data = null;
+				try {data = plan.getDataBase(altitude);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				double sonicSpeed=data.sonicSpeed;
+				double mach=(tas*0.514444)/sonicSpeed;
 							
-				waypoints.add(new Waypoint(0,0,altitude,(int)tas,distance,heading,segmentTime));
+				waypoints.add(new Waypoint(0,0,altitude,(int)tas,distance,heading,segmentTime, mach, sonicSpeed));
+				totalFlightTime += segmentTime;
 			}
 			plan.setWaypoints(waypoints);
 			
 			TreeMap<String,FA_18F>vfa102 = Hanger.vfa102();
 			FA_18F fa18f= vfa102.get("NF103");
-			
-//			double segmentTime=(distance*3600)/tas;
-//			double fuelUsed=fa18f.fuel() * (segmentTime / 3600);
-//			double remainingFuel;
-//			remainingFuel -= fuelUsed;
-//			segmentFuelList.add(fuelUsed);
 
 			if(fa18f != null) {
 			fa18f.setExtFuel(3300);
@@ -90,7 +93,7 @@ public class TestPlan extends HttpServlet {
 			    double capFuel = fa18f.cap(waypoints, 5, 15); // WP6 で 15分 CAP
 			    double oldFuel = segmentFuelList.get(5);
 			    segmentFuelList.set(5, oldFuel + capFuel); // 追加燃料反映
-			    totalFlightTime += 15 * 60; // 15分（900秒）追加
+			    totalFlightTime += 45 * 60; // 15分（900秒）追加
 
 			}
 			request.setAttribute("segmentFuelList", segmentFuelList);

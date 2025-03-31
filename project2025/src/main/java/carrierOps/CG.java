@@ -1,9 +1,9 @@
 package carrierOps;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class CG extends Vessels{
-	public CG(HashMap<Integer,String>cg) {
+	public CG(TreeMap<Integer, String> treeMap) {
 		
 	}
 }

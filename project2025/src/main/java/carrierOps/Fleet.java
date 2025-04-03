@@ -3,7 +3,7 @@ package carrierOps;
 import java.util.TreeMap;
 
 public interface Fleet {
-	public static TreeMap<Integer,String>cvnp(){
+	public static TreeMap<Integer,String>cvn(){
 		TreeMap<Integer,String>cvn=new TreeMap<>();
 		cvn.put(68,"Nimitz");
 		cvn.put(69,"Dowight_D_Eisenhower");

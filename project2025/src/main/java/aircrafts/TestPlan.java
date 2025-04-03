@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import mission.MissionContext;
+
 @WebServlet("/TestPlan")
 public class TestPlan extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -41,7 +43,6 @@ public class TestPlan extends HttpServlet {
 		int wayPoint=Integer.parseInt(request.getParameter("wayPoint"));
 		
 		session.setAttribute("missionType", missionType);
-
 		session.setAttribute("wayPoint", wayPoint);
 		
 		RequestDispatcher dispatcher
@@ -57,26 +58,26 @@ public class TestPlan extends HttpServlet {
 		 List<Waypoint>waypoints=new ArrayList<>();
 		 	double totalFlightTime = 0;
 
-			for(int i=0;i<wayPoint;i++) {				
-		           int altitude = Integer.parseInt(request.getParameter("altitude" + i));
-		           int cas = Integer.parseInt(request.getParameter("cas" + i));
-		           double distance = Double.parseDouble(request.getParameter("distance" + i));
-		           int heading = Integer.parseInt(request.getParameter("heading" + i));
+		for(int i=0;i<wayPoint;i++) {				
+		    int altitude = Integer.parseInt(request.getParameter("altitude" + i));
+		    int cas = Integer.parseInt(request.getParameter("cas" + i));
+		    double distance = Double.parseDouble(request.getParameter("distance" + i));
+		    int heading = Integer.parseInt(request.getParameter("heading" + i));
 				
-		        double tas=plan.convertTAS(altitude,cas);  
-				double segmentTime=(distance*3600)/tas;
+		    double tas=plan.convertTAS(altitude,cas);  
+			double segmentTime=(distance*3600)/tas;
 				
-				FlightPlan2.AtmosphereData data = null;
-				try {data = plan.getDataBase(altitude);
-				} catch (SQLException e) {
+			FlightPlan2.AtmosphereData data = null;
+			try {data = plan.getDataBase(altitude);
+			} catch (SQLException e) {
 					e.printStackTrace();
-				}
+			}
 				
-				double sonicSpeed=data.sonicSpeed;
-				double mach=(tas*0.514444)/sonicSpeed;
+			double sonicSpeed=data.sonicSpeed;
+			double mach=(tas*0.514444)/sonicSpeed;
 							
-				waypoints.add(new Waypoint(0,0,altitude,(int)tas,distance,heading,segmentTime, mach, sonicSpeed));
-				totalFlightTime += segmentTime;
+			waypoints.add(new Waypoint(0,0,altitude,(int)tas,distance,heading,segmentTime, mach, sonicSpeed));
+			totalFlightTime += segmentTime;
 			}
 			plan.setWaypoints(waypoints);
 			
@@ -96,11 +97,13 @@ public class TestPlan extends HttpServlet {
 			    totalFlightTime += 45 * 60; // 15分（900秒）追加
 
 			}
-			request.setAttribute("segmentFuelList", segmentFuelList);
+			session.setAttribute("segmentFuelList", segmentFuelList);
 			session.setAttribute("flightplan",plan);
 			session.setAttribute("fa18f",fa18f);
 			session.setAttribute("squadron", vfa102);
 			request.setAttribute("fa18f",fa18f);
+			request.setAttribute("flightplan",plan);
+			session.setAttribute("totalFlightTime", totalFlightTime);
 			request.setAttribute("totalFlightTime", totalFlightTime);
 			session.setAttribute("waypoints", waypoints);
 			request.setAttribute("waypoints", waypoints);
@@ -108,13 +111,21 @@ public class TestPlan extends HttpServlet {
 			request.setAttribute("segmentFuelList", segmentFuelList);
 		    request.setAttribute("capIndex", 5); // JSP側表示用
 		    request.setAttribute("capDuration", 15);
+		    
+		    MissionContext context = new MissionContext(
+		    	    missionType,
+		    	    plan,
+		    	    fa18f,
+		    	    null, // Carrier はまだ設定されていない場合
+		    	    segmentFuelList,
+		    	    totalFlightTime
+		    	);
+		    	session.setAttribute("missionContext", context);
 		 RequestDispatcher dispatcher
 		 =request.getRequestDispatcher("WEB-INF/jsp/FlightPlanner.jsp");
 		 dispatcher.forward(request, response);
-		 	
-			
 		 
+			 
 		}
-
 	}
 }

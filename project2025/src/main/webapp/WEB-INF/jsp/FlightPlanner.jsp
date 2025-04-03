@@ -78,7 +78,7 @@
     <h3>Remaining Fuel ${fa18f.modex}</h3>
 <p>Initial Fuel: <c:out value="${fa18f.intFuel+(fa18f.extFuel * 2)}"/> lb</p>
 <p>Final Fuel: <fmt:formatNumber value="${fa18f.remainingFuel}" maxFractionDigits="1" />  lb</p>
-<form action="missionConfig" method="post">
+<form action="CarrierInfo" method="get">
     <button type="submit">Set Home Carrier</button>
 </form>
 </body>

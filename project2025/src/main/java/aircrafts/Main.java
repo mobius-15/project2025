@@ -1,14 +1,13 @@
 package aircrafts;
 import java.util.Random;
 
-import carrierOps.CVN;
-import carrierOps.Fleet;
+import carrierOps.Carrier;
 public class Main {
 
 	public static void main(String[] args) throws Exception{
 		// TODO 自動生成されたメソッド・スタブ
 		Random random=new Random();
-		CVN cvn =new CVN(Fleet.cvnp(), 0, 0, 0, 0);
+		Carrier carrier ;
 		
 //		List<String>vModex102 = Hanger.vfa102();
 //		List<String>vModex147=Hanger.vfa147();

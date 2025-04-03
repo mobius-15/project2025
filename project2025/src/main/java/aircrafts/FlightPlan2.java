@@ -3,13 +3,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import carrierOps.CVN;
+import carrierOps.Carrier;
 import dao.AtmosphereDAO;
 
 public class FlightPlan2 extends Aircrafts{
 
 	private List<Waypoint> waypoints = new ArrayList<>();
-	private CVN cvn;
+	private Carrier carrier;
     
 public static class AtmosphereData{public double densityRatio,sonicSpeed;
      public AtmosphereData (double ratio,double speed){
@@ -69,11 +69,11 @@ public void specify (int wayPoint,double startLat,double startLon) throws SQLExc
 	public void setWaypoints(List<Waypoint> waypoints) {
 		this.waypoints = waypoints;
 	}
-	public CVN getCvn() {
-		return cvn;
+	public Carrier getCvn() {
+		return carrier;
 	}
-	public void setCvn(CVN cvn) {
-		this.cvn = cvn;
+	public void setCvn(Carrier carrier) {
+		this.carrier = carrier;
 	}
 }	
 

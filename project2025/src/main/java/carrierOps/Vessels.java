@@ -4,7 +4,7 @@ public class Vessels {
 //	private static String name;
 	private String name;
 	private int fullDisplacement; 
-	private int basicPlacement;
+	private int displacement;
 	private int length;
 	private int width;
 	private int power;
@@ -25,11 +25,11 @@ public class Vessels {
 	public void setPower(int power) {
 	this.power=power;
 	}
-	public int getBasicPlacement() {
-		return basicPlacement;
+	public int getDisplacement() {
+		return displacement;
 	}
-	public void setBasicPlacement(int basicPlacement) {
-		this.basicPlacement = basicPlacement;
+	public void setDisplacement(int basicPlacement) {
+		this.displacement = basicPlacement;
 	}
 	public int getFullDisplacement() {
 		return fullDisplacement;

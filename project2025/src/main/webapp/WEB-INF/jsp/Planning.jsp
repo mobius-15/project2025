@@ -44,7 +44,7 @@
 </select>
 
 <label>Duration (minutes):</label>
-<input type="number" name="capDuration" min="1" max="60" value="15">
+<input type="number" name="capDuration" min="1" max="60" >
           <button type="submit">Submit</button>
 
     </form>

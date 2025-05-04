@@ -1,4 +1,4 @@
-package aircrafts;
+package flightplan;
 
 public class Waypoint {
     private double latitude;
@@ -12,7 +12,7 @@ public class Waypoint {
     private double sonicSpeed;
 
  public Waypoint
-( double latitude, double longitude, int altitude, int speed, double distance, int heading,double segmentTime,double mach, double sonicSpeed) {
+( double latitude, double longitude, int altitude, int speed, double distance, int heading,double segmentTime,double mach) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.altitude = altitude;
@@ -26,7 +26,7 @@ public class Waypoint {
 
     // 起点のみGPS座標を設定
     public static Waypoint createStartPoint(double latitude, double longitude, int altitude, int speed) {
-        return new Waypoint(latitude, longitude, altitude, speed, 0, 0, 0, 0.0, 340.29); // 最初のWPは距離=0、方位=0
+        return new Waypoint(latitude, longitude, altitude, speed, 0, 0, 0, 0.0); // 最初のWPは距離=0、方位=0
     }
 
     public int getAltitude() { return altitude; }

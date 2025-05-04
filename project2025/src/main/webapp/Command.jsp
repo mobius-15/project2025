@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ page import="java.util.List,aircrafts.*" %>
+   <%@ page import="java.util.List,aircrafts.*,mission.*" %>
    <% List<String> missionTypes = (List<String>)request.getAttribute("missionTypes"); %>
    <% String selectedMission = request.getParameter("missionType"); %>
 <!DOCTYPE html>

@@ -1,5 +1,11 @@
 package aircrafts;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
+
+import mission.Target;
 public class Hanger extends Aircrafts{
 	static String tailcode ="NF";
 	Aircrafts name;
@@ -53,11 +59,42 @@ return vfa195;
 	public void setSquadron(String squadron) {
 		this.squadron=squadron;
 	}
-    public static void printSquadron(TreeMap<String, FA_18> squadron) {
+//    public static void printSquadron(TreeMap<String, FA_18> squadron) {
 //        System.out.println("Squadron: " + squadron);
 //        for (Map.Entry<String, FA_18> entry : squadron.entrySet()) {
 //            System.out.println("Aircraft: " + entry.getKey() + " - " + entry.getValue().getName());
         
 //        }
+//    }
+        public static Aircrafts selectRandomWingman(TreeMap<String, FA_18F> squadron, String excludeModex) {
+            List<Map.Entry<String, FA_18F>> entries = new ArrayList<>(squadron.entrySet());
+            Collections.shuffle(entries);
+            for (Map.Entry<String, FA_18F> entry : entries) {
+                if (!entry.getKey().equals(excludeModex)) {
+                    return entry.getValue();
+                }
+            }
+            return null;
+        }
+            public static List<Aircrafts> selectWingmen(TreeMap<String, ? extends Aircrafts> squadron, String excludeModex, int count) {
+                List<Aircrafts> wingmen = new ArrayList<>();
+                List<Map.Entry<String, ? extends Aircrafts>> entries = new ArrayList<>(squadron.entrySet());
+                Collections.shuffle(entries);
+
+                for (Map.Entry<String, ? extends Aircrafts> entry : entries) {
+                    if (!entry.getKey().equals(excludeModex)) {
+                        wingmen.add(entry.getValue());
+                        if (wingmen.size() >= count) break;
+                    }
+                }
+                return wingmen;
+            }
+            public static void printTargets(List<Target> targets) {
+            	
+                for (Target t : targets) {
+                    System.out.printf("Target: %s - Lat %.3f / Lon %.3f%n", t.getName(), t.getLat(), t.getLon());
+                }
+            
+           	}
+    	
     }
-}

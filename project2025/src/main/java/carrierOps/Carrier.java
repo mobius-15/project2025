@@ -1,14 +1,20 @@
 package carrierOps;
 
 public class Carrier extends Vessels implements Fleet{
-Fleet cvn;			
+Fleet cvn;	
+
 private double latitude;
 private double longitude;
 private int speed;
 private int cats;
+
 	public Carrier(String name,double lat,double lon,int speed,int displacement) {
 //		setName(cvn.get(5));
-		
+		 super(name, displacement);
+		 	this.setName(name);
+		    this.latitude = lat;
+		    this.longitude = lon;
+		    this.speed = speed;
 		setPower(260000);
 		setDisplacement(85000);
 		setCats(4);

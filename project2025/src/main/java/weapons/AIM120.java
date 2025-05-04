@@ -1,6 +1,6 @@
 package weapons;
 
-public class AIM120 extends AirToAir{
+public class AIM120 extends Weapons implements AirToAir{
 	public AIM120() {
         setName("AIM-120 AMRAAM");
         setWeightlb(335);

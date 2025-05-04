@@ -1,7 +1,10 @@
-package aircrafts;
+package mission;
 	
 import java.util.ArrayList;
 import java.util.List;
+
+import aircrafts.Aircrafts;
+import flightplan.FlightPlan2;
 
 public class Missions extends FlightPlan2{
 	private int sorties;

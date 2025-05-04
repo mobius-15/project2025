@@ -10,9 +10,12 @@ public class Vessels {
 	private int power;
 	private int speed;
 	private int direction;
-
-//	public static String getName() {
-//		return name;
+	
+	public Vessels(String name,int displacement) {
+	
+	
+	
+	}
 	public String getName() {
 		return this.name;
 	}

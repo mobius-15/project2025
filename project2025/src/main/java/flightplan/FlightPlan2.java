@@ -3,13 +3,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import aircrafts.Aircrafts;
 import carrierOps.Carrier;
 import logic.AircraftsLogic;
 
-public class FlightPlan2 extends Aircrafts{
-	
+public class FlightPlan2{
+	Waypoint wp;
+	private int wpCount;
 	private String id;
+
+	public int getWpCount() {
+		return wpCount;
+	}
+
+	public void setWpCount(int wpCount) {
+		this.wpCount = wpCount;
+	}
 	public String getId() {
 		return id;
 	}
@@ -32,12 +40,15 @@ public void specify (int wayPoint,double startLat,double startLon) throws SQLExc
 		double distance = Math.random() * 250 + 50;
 		int heading = (int)(Math.random() * 360);
 		int cas = 250;
-
+		
 		double tas = aLogic.calculateTAS(altitude, cas);
 		double mach = aLogic.calculateMach(altitude, cas);
 		double segmentTime = aLogic.calculateSegmentTime(distance, tas);
+		
+		Waypoint prev=waypoints.get(waypoints.size()-1);
 
 		Waypoint wp = new Waypoint(0, 0, altitude, (int)tas, distance, heading, segmentTime, mach);
+		wp.calculatePosition(prev.getLatitude(),prev.getLongitude());
 		waypoints.add(wp);
 	}
 }
@@ -55,6 +66,23 @@ public void specify (int wayPoint,double startLat,double startLon) throws SQLExc
 		this.carrier = carrier;
 	}
 	
+	public void updateWaypointCoordinates(double startLat, double startLon) {
+	    double currentLat = startLat;
+	    double currentLon = startLon;
+
+	    for (int i = 0; i < waypoints.size(); i++) {
+	        Waypoint wp = waypoints.get(i);
+	        if (i == 0) {
+	            wp.setLatitude(currentLat);
+	            wp.setLongitude(currentLon);
+	        } else {
+	            wp.calculatePosition(currentLat, currentLon);
+	            currentLat = wp.getLatitude();
+	            currentLon = wp.getLongitude();
+	        }
+	    }
+	}
+	
 	public String exportWaypointsAsJson() {
 	    StringBuilder json = new StringBuilder("[");
 	    for (int i = 0; i < waypoints.size(); i++) {
@@ -69,6 +97,7 @@ public void specify (int wayPoint,double startLat,double startLon) throws SQLExc
 	    json.append("]");
 	    return json.toString();
 	}
+
 }	
 
 	

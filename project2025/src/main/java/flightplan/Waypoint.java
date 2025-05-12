@@ -21,7 +21,7 @@ public class Waypoint {
         this.heading = heading;
         this.segmentTime =segmentTime;
         this.mach = mach;
-        this.sonicSpeed = sonicSpeed;
+        
     }
 
     // 起点のみGPS座標を設定
@@ -41,5 +41,25 @@ public class Waypoint {
     
     public void setMach(double mach) { this.mach = mach; }
     public void setSonicSpeed(double sonicSpeed) { this.sonicSpeed = sonicSpeed; }
+    public void setLatitude(double latitude) {this.latitude=latitude;}
+    public void setLongitude(double longitude) {this.longitude=longitude;}
+    public void calculatePosition(double baseLat, double baseLon) {
+        // 地球半径（海里） → 3440.065 NM
+        double radiusNm = 3440.065;
+        double delta = distance / radiusNm; // 角度ラジアン
 
+        double theta = Math.toRadians(heading);
+        double baseLatRad = Math.toRadians(baseLat);
+        double baseLonRad = Math.toRadians(baseLon);
+
+        double newLatRad = Math.asin(Math.sin(baseLatRad) * Math.cos(delta) +
+                                     Math.cos(baseLatRad) * Math.sin(delta) * Math.cos(theta));
+
+        double newLonRad = baseLonRad + Math.atan2(Math.sin(theta) * Math.sin(delta) * Math.cos(baseLatRad),
+                                                   Math.cos(delta) - Math.sin(baseLatRad) * Math.sin(newLatRad));
+
+        this.latitude = Math.toDegrees(newLatRad);
+        this.longitude = Math.toDegrees(newLonRad);
+    }
+    
 }

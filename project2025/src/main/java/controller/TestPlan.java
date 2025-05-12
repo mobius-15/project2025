@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import jakarta.servlet.RequestDispatcher;
@@ -78,6 +79,9 @@ public class TestPlan extends HttpServlet {
 			int wayPoint = Integer.parseInt(request.getParameter("wayPoint"));
 
 			FlightPlan2 plan = new FlightPlan2();
+			String missionId = UUID.randomUUID().toString();
+			plan.setId(missionId);
+			System.out.println("Assigned FlightPlan ID: " + missionId);
 			AircraftsLogic aLogic=new AircraftsLogic();
 			List<Waypoint> waypoints = new ArrayList<>();
 			double totalFlightTime = 0;
@@ -126,7 +130,7 @@ public class TestPlan extends HttpServlet {
 			String missionType = (String) session.getAttribute("missionType");
 			
 			int capIndex=0;
-			int capDuration=45;
+			int capDuration=60;
 			if ("CAP".equalsIgnoreCase(missionType) && waypoints.size() >= 3) {
 				capIndex=waypoints.size()/2;				
 				double capFuel = aLogic.cap(waypoints, capIndex,capDuration,fa18f); // WP数 で 15分 CAP
@@ -139,6 +143,7 @@ public class TestPlan extends HttpServlet {
 			= new MissionContext(missionType,plan,fa18f,null, // Carrier はまだ設定されていない場合
 				segmentFuelList,totalFlightTime);
 			List<Weapons> weaponList = WeaponFactory.getAllWeapons();
+			ctx.getFlightPlan().setId(plan.getId());
 			
 			session.setAttribute("segmentFuelList", segmentFuelList);
 			session.setAttribute("flightplan", plan);

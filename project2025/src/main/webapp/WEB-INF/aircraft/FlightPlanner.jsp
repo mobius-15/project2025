@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 <%@ page import="java.util.*,controller.*,carrierOps.*,aircrafts.*,logic.*,flightplan.*,mission.*,weapons.*"%>
 <%
-MissionContext context = (MissionContext) session.getAttribute("missionContext");
+MissionContext context = (MissionContext) session.getAttribute("ctx");
 FA_18 fa18f = (FA_18F) session.getAttribute("fa18f");
 %>
 

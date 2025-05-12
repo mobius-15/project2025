@@ -14,8 +14,7 @@ public abstract class Aircrafts implements Serializable {
 	private int combatRange, ferryRange;
 	private int ceilingAlt;
 	private int milThrust;// 推力 (N)
-	private int intfuel;
-	private int wpCount;
+	private int intfuel;	
 	private double emptyWeight,loadoutWeight, fullWeight;
 	private double fuelFlow;
 	private double remainingFuel;
@@ -232,13 +231,7 @@ public abstract class Aircrafts implements Serializable {
 
 	}
 
-	public int getWpCount() {
-		return wpCount;
-	}
 
-	public void setWpCount(int wpCount) {
-		this.wpCount = wpCount;
-	}
 
 	public int getCas() {
 		return cas;

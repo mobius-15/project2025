@@ -5,6 +5,7 @@ Planning.jspにて各ポイントの高度(feet)、速度(knot)、方位(0-360)�
 FlightPlanner.jspにて設定した航空機の情報表示、推定消費燃料を計算し反映。<br/>
 carrierConfig.jspにて母艦(拠点)の情報設定。これ以降CarrierInfoサーブレットでコントロール。<br/>
 MissionReview.jspに遷移し、航空機、母艦それぞれの情報をまとめて表示。<br/>
+セッションスコープを保持するため、総合した情報を格納できるMissionContextを用意している。<br/>
 同画面でLoadoutConfig.jspに遷移し装備の設定も可能。<br/>
 設定後、MissionReview.jspに再遷移して設定した装備を確認。<br/>
 View MAPをクリックしleaflet地図(MissionMAP.jsp)を表示。地図上にはPlanning.jspで設定した経路が実線で表示される。<br/>

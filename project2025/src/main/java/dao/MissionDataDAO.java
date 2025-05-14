@@ -21,7 +21,7 @@ public class MissionDataDAO {
 
 	private static final String URL = "jdbc:mysql://localhost:3306/air_strike?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 	private static final String USER = "root";
-	private static final String PASSWORD = "qq3g9yp";
+	private static final String PASSWORD = "";
 
 	public void saveFlightPlan(FlightPlan2 plan, String missionId, String missionType, String aircraftModex,
 			String carrierName, double totalTime) throws SQLException {

@@ -11,7 +11,7 @@ public class AtmosphereDAO {
 
 	    private static final String URL = "jdbc:mysql://localhost:3306/standard_atmosphere?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 	    private static final String USER = "root";
-	    private static final String PASSWORD = "qq3g9yp";
+	    private static final String PASSWORD = "";
 
 	    public static Atmosphere fetchDataByAltitude(int altitude) {
 	    	try {Class.forName("com.mysql.cj.jdbc.Driver");

@@ -4,7 +4,7 @@
 index.jspでログイン(ユーザー：Mobius1,パスワード：password) <br/>
 Command.jspにてCAP,WP数を設定。(任務種別のセレクトボックス内はCAP以外の機能は未実装。WP推奨2か所以上)<br/>
 Planning.jspにて各ポイントの高度(feet)、速度(knot)、方位(0-360)、区間距離(nm)を設定。Testplanサーブレットでコントロール。<br/>
-CAP（哨戒）のため旋回を行う地点を設定可能。（WP数/2の中点を推奨）燃料消費量は上昇フェーズなどによって変動(AircraftLogic,FuelLogicにより)<br/>
+CAP（哨戒）のため旋回を行う地点を設定可能。（下記テストデータではWP4を推奨）燃料消費量は上昇フェーズなどによって変動(AircraftLogic,FuelLogicにより)<br/>
 FlightPlanner.jspに遷移して設定した航空機の情報表示、推定消費燃料を計算し反映。<br/>
 carrierConfig.jspに遷移して母艦(拠点)の情報設定。これ以降CarrierInfoサーブレットでコントロール。<br/>
 MissionReview.jspに遷移し、航空機、母艦それぞれの情報をまとめて表示。

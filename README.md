@@ -20,6 +20,7 @@ View MAPをクリックしleaflet地図(MissionMAP.jsp)を表示。地図上に�
 本来は、MySQLデータベースに設定した標準大気表(高度6万feetまで)を用いて速度計算(CAS→TAS)に利用するが<br/>
 外部公開していないため速度はCASで計算される。そのため所要時間、燃料等は異なる結果となる。<br/>
 生成したフライトプラン、機体や母艦の情報もDBに保存する事を前提としている。(SaveServletを用意)<br/>
-データベースのテーブル（一部）https://github.com/mobius-15/DataBases.git
+データベースのテーブル（一部）https://github.com/mobius-15/DataBases.git<br/>
+サーバーはTomcat10<br/>
 
 テストデータ：<br/>ログイン(ユーザー：Mobius1,パスワード：password)<br/>index(CAP,6)<br/>WP1(200ft,200kt,5nm,180°),<br/>WP2(5000ft,280kt,10nm,90°),<br/>WP3(25000ft,330kt,90nm,110°),<br/>WP4(28000ft,280kt,10nm,150°),<br/>WP5(25000ft,330kt,90nm,290°),<br/>WP6(2500ft,260kt,15nm,320°)<br/>Carrier(68Nimitz,lat:19.181,lon:134.139,speed:30kt,disp:100500)

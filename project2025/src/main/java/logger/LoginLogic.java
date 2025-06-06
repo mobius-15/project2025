@@ -13,7 +13,7 @@ public class LoginLogic {
         UserBean user = userDao.getUser(login, pwd);
         return user;*/
 		
-		if(user.getPass().equals("password")) {
+		if(user.getName().equals("Mobius1") && user.getPass().equals("password")) {
 			return true;
 		}else{
 			return false;

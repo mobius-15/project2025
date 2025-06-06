@@ -29,7 +29,8 @@ public class MapServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+    	
+    	response.setContentType("application/json");
         HttpSession session = request.getSession();
         MissionContext ctx = (MissionContext) session.getAttribute("ctx");
 
@@ -38,9 +39,7 @@ public class MapServlet extends HttpServlet {
             response.getWriter().write("{\"status\":\"error\",\"message\":\"Context or Carrier not found\"}");
             return;
         }
-        if (ctx.getTargetPoints() != null) {
-            session.setAttribute("targetPoints", ctx.getTargetPoints());
-        }
+
 
         // JSON から読み込み
         BufferedReader reader = request.getReader();
@@ -54,13 +53,17 @@ public class MapServlet extends HttpServlet {
         // キャリア座標更新
         ctx.getCarrier().setLatitude(lat);
         ctx.getCarrier().setLongitude(lon);
+        
+        if (ctx.getTargetPoints() != null) {
+            session.setAttribute("targetPoints", ctx.getTargetPoints());
+        }
+        
         session.setAttribute("ctx", ctx);
         System.out.println("Session updated with new Carrier coordinates.");
-
+        
         // 必要なら DB 反映もここで呼び出し可能
         // new MissionDataDAO().updateCarrierPosition(ctx.getFlightPlan().getId(), lat, lon);
-
-        response.setContentType("application/json");
+;
         response.getWriter().write("{\"status\":\"ok\"}");
     }
 }

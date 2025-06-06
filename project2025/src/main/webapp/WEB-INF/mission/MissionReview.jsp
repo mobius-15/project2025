@@ -3,24 +3,6 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page import="java.util.*,controller.*,carrierOps.*,aircrafts.*,mission.*,flightplan.*,logic.*" %>
-<%
-MissionContext ctx = (MissionContext) session.getAttribute("ctx");
-List<Target> targets = ctx != null ? ctx.getTargetPoints() : new ArrayList<>();
-if (targets.isEmpty()) {
-    out.println("No targets have been set.");
-} else {
-    for (Target target : targets) {
-%>
-        <div>
-            <p>Target Name: <%= target.getName() %></p>
-            <p>Latitude: <%= target.getLat() %></p>
-            <p>Longitude: <%= target.getLon() %></p>
-        </div>
-<%
-    }
-}
-%>
-
 <c:if test="${empty sessionScope.ctx}">
   <p><strong>Error:</strong> Mission context is not available. Please return to planning.</p>
   <a href="index.jsp">Back to Start</a>
@@ -110,7 +92,7 @@ if (targets.isEmpty()) {
 <table border="1">
 <tr><th>Name</th><th>Latitude</th><th>Longitude</th></tr>
 
-<c:forEach var="tgt" items="${sessionScope.ctx.targetPoints}">
+<c:forEach var="tgt" items="${session.getAttribute('ctx').targetPoints}">
   <tr>
     <td>${tgt.name}</td>
     <td><fmt:formatNumber value="${tgt.lat}" maxFractionDigits="6" /></td>

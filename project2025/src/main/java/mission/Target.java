@@ -37,5 +37,8 @@ public class Target {
 	public void setRadius(double radius) {
 		this.radius = radius;
 	}
+    public String toString() {
+        return "Target{name='" + name + "', lat=" + lat + ", lon=" + lon + "}";
+    }
 
 }

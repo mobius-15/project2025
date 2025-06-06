@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.MissionDataDAO;
@@ -23,62 +24,105 @@ import mission.Target;
 @WebServlet("/TargetServlet")
 public class TargetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TargetServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    HttpSession session = request.getSession();
-	    MissionContext ctx = (MissionContext) session.getAttribute("ctx");
-	    if (ctx == null) {
-	        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "MissionContext not found");
-	        return;
-	    }
-	    if (ctx.getFlightPlan() == null || ctx.getFlightPlan().getId() == null) {
-	        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "FlightPlan or its ID not found in context");
-	        return;
-	    }
-	    String json = request.getReader().lines().collect(Collectors.joining());
-	    ObjectMapper mapper = new ObjectMapper();
-	    try {
-	    Target newTarget =mapper.readValue(json,Target.class);
-	    System.out.println("Received target: " + newTarget.getName());
-
-//	    List<Target> targetList = ctx.getTargetPoints();
-        if (ctx.getTargetPoints()== null) {
-        	ctx.setTargetPoints(new ArrayList<>());
-        }
-//	    Target dummy = new Target("Test Target", 25.0, 135.0);
-//	    dummy.setRadius(0.5);
-//	    ctx.getTargetPoints().add(dummy);
-	    
-	    ctx.getTargetPoints().add(newTarget);
-//	    ctx.setTargetPoints(targetList);  
-
-	    
-	    MissionDataDAO dao = new MissionDataDAO();
-	    dao.saveTargets(ctx.getFlightPlan().getId(),ctx.getTargetPoints());		//test
-	    session.setAttribute("ctx", ctx);
-	    System.out.println("Saving targets for mission ID: " + ctx.getFlightPlan().getId());	    
-	    System.out.println("Session updated with targets: " +ctx.getTargetPoints().size() );	//test
-	    // 応答返却
-	   
-	        // 保存処理
-	    } catch (Exception e) {
-	    	e.printStackTrace();
-	        response.setContentType("application/json");
-	        response.getWriter().write("{\"status\":\"error\",\"message\":\"" + e.getMessage() + "\"}");
-	    }
-	    response.sendRedirect("CarrierInfo?action=review");
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public TargetServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("application/json");
+		HttpSession session = request.getSession();
+
+		MissionContext ctx = (MissionContext) session.getAttribute("ctx");
+		
+        System.out.println("Session ID: " + session.getId());
+        System.out.println("Context exists: " + (ctx != null));
+
+		if (ctx == null) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			response.getWriter().write("{\"status\":\"error\",\"message\":\"MissionContext is missing\"}");
+			return;
+		}
+
+		if (ctx.getFlightPlan() == null || ctx.getFlightPlan().getId() == null) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			response.getWriter().write("{\"status\":\"error\",\"message\":\"Context or FlightPlan missing\"}");
+			return;
+		}
+
+		try {
+			String json = request.getReader().lines().collect(Collectors.joining());
+			System.out.println("Received JSON: " + json);
+			ObjectMapper mapper = new ObjectMapper();
+			Target newTarget = mapper.readValue(json, Target.class);
+			System.out.println("Received target: " + newTarget.getName());
+
+			if (newTarget.getName() == null || newTarget.getName().trim().isEmpty()) {
+				System.out.println("ERROR: Target name is empty");
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				response.getWriter().write("{\"status\":\"error\",\"message\":\"Targets missing\"}");
+				return;
+			}
+
+			if (ctx.getTargetPoints() == null) {
+				ctx.setTargetPoints(new ArrayList<>());
+			}
+
+            System.out.println("Current target count: " + ctx.getTargetPoints().size());
+            
+            // 新しいTargetを追加
+            ctx.getTargetPoints().add(newTarget);
+            System.out.println("Target added. New count: " + ctx.getTargetPoints().size());
+
+			try {
+				MissionDataDAO dao = new MissionDataDAO();
+				dao.saveTargets(ctx.getFlightPlan().getId(), ctx.getTargetPoints()); //test
+				System.out.println("Session updated with targets: " + ctx.getTargetPoints().size());
+
+				response.getWriter().write("{\"status\":\"ok\",\"count\":" + ctx.getTargetPoints().size() + "}");
+				System.out.println("Session updated");
+				session.setAttribute("ctx", ctx);
+				response.getWriter().write("{\"status\":\"ok\",\"message\":\"Target added successfully\",\"count\":"
+						+ ctx.getTargetPoints().size() + "}");
+
+            } catch (Exception dbException) {
+                System.err.println("Database error: " + dbException.getMessage());
+                dbException.printStackTrace();
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				response.getWriter().write("{\"status\":\"error\",\"message\":\"" + dbException.getMessage() + "\"}");
+				
+                session.setAttribute("ctx", ctx);
+                System.out.println("Session updated despite DB error");
+			}
+
+			
+		} catch (JsonProcessingException jsonException) {
+			System.err.println("JSON parsing error: " + jsonException.getMessage());
+			jsonException.printStackTrace();
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			response.getWriter().write("{\"status\":\"error\",\"message\":\"Invalid JSON format\"}");
+
+		} catch (IOException ioException) {
+			System.err.println("IO error: " + ioException.getMessage());
+			ioException.printStackTrace();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			response.getWriter().write("{\"status\":\"error\",\"message\":\"IO error occurred\"}");
+
+		} catch (Exception e) {
+			System.err.println("Unexpected error: " + e.getMessage());
+			e.printStackTrace();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			response.getWriter().write("{\"status\":\"error\",\"message\":\"Internal server error\"}");
+		}
+	}
+}

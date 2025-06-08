@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
     addCarrierMarker();
     addWaypoints();
     addAircraft();
-    addTargets();
+
     fitMapBounds();
     setMode('carrier');
 });

@@ -92,14 +92,14 @@
 <table border="1">
 <tr><th>Name</th><th>Latitude</th><th>Longitude</th></tr>
 
-<c:forEach var="tgt" items="${session.getAttribute('ctx').targetPoints}">
+<c:forEach var="tgt" items="${ctx.targetPoints}">
   <tr>
     <td>${tgt.name}</td>
     <td><fmt:formatNumber value="${tgt.lat}" maxFractionDigits="6" /></td>
     <td><fmt:formatNumber value="${tgt.lon}" maxFractionDigits="6" /></td>
   </tr>
 </c:forEach>
-<%= ((MissionContext) session.getAttribute("ctx")).getTargetPoints().size() %>
+
 </table>
 
 <h3>Flight Summary</h3>

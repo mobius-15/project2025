@@ -45,17 +45,16 @@ public class CarrierInfo extends HttpServlet {
 				request.setAttribute("carrier", ctx.getCarrier());
 			}
 			request.getRequestDispatcher("WEB-INF/mission/MissionMAP.jsp").forward(request, response);
-		} else 		if ("review".equals(action)) {
-			if (ctx != null && ctx.getTargetPoints() != null) {
-				request.setAttribute("targetPoints", ctx.getTargetPoints());
+		} else if ("review".equals(action)) {
+			request.getRequestDispatcher("WEB-INF/mission/MissionReview.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("WEB-INF/vessel/carrierConfig.jsp").forward(request, response);
 		}
 
 			}
-			request.getRequestDispatcher("WEB-INF/mission/MissionReview.jsp").forward(request, response);
-		}
-	
+//			request.getRequestDispatcher("WEB-INF/mission/MissionReview.jsp").forward(request, response);
+//		}
+//	}
 
 	/**
 	* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -68,10 +68,14 @@ public class MissionContextLogic {
         }
      }
         public void addTarget(Target target) {
+            if (target == null) return;
             if (context.getTargetPoints() == null) {
                 context.setTargetPoints(new ArrayList<>());
             }
             context.getTargetPoints().add(target);
+        }
+        public int getTargetCount() {
+            return context.getTargetPoints() != null ? context.getTargetPoints().size() : 0;
         }
         public void removeTargetByName(String name) {
             if (context.getTargetPoints() != null) {

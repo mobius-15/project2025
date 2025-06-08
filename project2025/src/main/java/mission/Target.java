@@ -7,6 +7,8 @@ public class Target {
     private double lon;
     private double radius;
     
+    public Target() {}
+    
 	public Target(String name,double lat, double lon) {
         this.name = name;
         this.lat = lat;

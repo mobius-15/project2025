@@ -1,0 +1,34 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;                     /* 幅・高さの指定でpaddingとborderを含める */
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+.fruits-list {
+	width: 100vw;                               /* 幅を画面全体に指定する */
+	padding: 5px;                               /* 内側の余白を5pxに指定 */
+}
+
+.fruits-list div {
+	width: calc((100vw - 10px)/4 - 10px);       /* 100vwを使って指定する。 */
+	height: calc((100vw - 10px)/4 - 10px);      /* widthと同じ式を指定する */
+	margin: 5px;                                /* 外側の余白を5pxに指定 */
+	padding: 20px;                              /* 内側の余白を20pxに指定 */
+	border: 2px solid black;                  /* 枠線を2pxの黒に指定 */
+	background: #f0f0f0;                      /* 背景を薄いグレーに指定 */
+	float: left;                                /* 左に寄せながら配置 */
+	font-size: 30px;
+}
+
+/* ウィンドウの幅が最大768pxまでのとき（つまり768px以下のとき） */
+@media only screen and (max-width:768px) {
+	.fruits-list div {
+		width: calc((100vw - 10px)/3 - 10px);    /* 3分割とする */
+		height: calc((100vw - 10px)/3 - 10px);   /* widthと同じ式を指定する */
+		padding: 5px;  							 /* 内側の余白を5pxに指定 */
+	}  
+}

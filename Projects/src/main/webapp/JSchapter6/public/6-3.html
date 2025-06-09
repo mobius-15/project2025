@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="6-3.js"></script>
+</head>
+<body>
+<p>6-3</p>
+<input type="text" id="text-a">
+<input type="text" id="text-b"><br>
+<input type="button" onclick="goukei()" value="Total">
+<div id="goukei"></div>
+<br>
+<br>
+<p>6-4</p>
+<form name='form1'>
+	数値を入力<br>
+	<input type="text"name="text_x">
+	<input type="text" name="text_y"><br>
+	演算
+	<input type="radio" name="keisan" value="+" checked>+
+	<input type="radio" name="keisan" value="-">-
+	<input type="radio" name="keisan" value="*">*
+	<input type="radio" name="keisan" value="/">/<br>
+	
+	<select name="color">
+		<option value="black">black</option>
+		<option value="red" selected>red</option>
+		<option value="blue">blue</option>
+		<option value="orange">orange</option>
+	</select>
+	<input type="checkbox" name="big">UpScale<br>
+	<br>
+	<input type="button" onclick="calc()" value="Calculate">
+	<div id="result"></div>
+</form>
+</body>
+</html>

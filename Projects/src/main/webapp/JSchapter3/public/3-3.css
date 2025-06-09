@@ -1,0 +1,62 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-size: 24px;
+}
+
+body {
+	background: #e0e0e0;
+}
+
+.container {
+	width: 1000px;
+	background: white;
+}
+
+.title {
+	font-size: 30px;
+	line-height: 40px;
+	height: 40px;
+	padding: 5px;
+	text-align: center;
+}
+
+.job {
+	width: 100%;
+	height: calc(100vh - 40px);
+	padding: 10px;
+}
+
+.job div {
+	color: black;
+	padding: 5px;
+	margin: 10px;
+	width: calc(100% / 4 - 20px);
+	height: calc(100% - 20px);
+	float: left;
+	border: 2px dashed gray;
+	border-radius: 20px;
+	background-color: #f6f6ff;
+	text-align: left;
+}
+
+
+/* ウィンドウの幅が1000px以下のとき */
+@media only screen and (max-width:1000px) {
+	.container {
+		width: 100vw;
+	}
+	.job div {
+		width: calc(50% - 20px);
+		height: calc(50% - 20px);
+	}
+}
+
+/* ウィンドウの幅が768px以下のとき */
+@media only screen and (max-width:768px) {
+	.job div {
+		width: calc(100% - 20px);
+		height: calc(25% - 20px);
+	}
+}

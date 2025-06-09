@@ -1,0 +1,37 @@
+
+
+*{
+	margin: 0;
+	box-sizing: border-box;
+}
+body{
+	background:lightgray;
+}
+.calendar{
+	width: 100vw;
+	height: 100vh;
+	padding: 3px;
+}
+.day{
+	font-size: 20px;
+	width: calc(100% / 7 - 6px);
+	height: calc(100% / 5 - 6px); 
+	background:white;
+	border: 1px solid gray;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 3px;
+	float: left;
+}
+.sunday{
+	color:red;
+}
+.saturday{
+	color:blue;
+}
+.other-month{
+	opacity: 0.3;
+}
+.schedule-text{
+	font-size: 8px;
+}

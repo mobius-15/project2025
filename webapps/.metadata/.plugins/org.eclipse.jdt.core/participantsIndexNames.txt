@@ -1,0 +1,11 @@
+INDEX VERSION 1.134
+C:\pleiades\2024-09\tomcat\10\webapps\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1238893079.index
+\webapps\docs\appdev\sample\src
+C:\pleiades\2024-09\tomcat\10\webapps\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1866407756.index
+\webapps\docs\appdev\sample\src
+C:\pleiades\2024-09\tomcat\10\webapps\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1113001038.index
+\webapps\docs\appdev\sample\src
+C:\pleiades\2024-09\tomcat\10\webapps\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\560933957.index
+\webapps\docs\appdev\sample\src
+C:\pleiades\2024-09\tomcat\10\webapps\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1209960353.index
+\webapps\docs\appdev\sample\src

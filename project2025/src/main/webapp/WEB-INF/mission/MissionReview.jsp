@@ -114,9 +114,8 @@
     <input type="hidden" name="action" value="saveDatabase"/>
     <button type="submit"style="padding:10px; margin:5px;">Save to Database</button>
 </form>
-<form action="SaveServlet" method="post">
-    <input type="hidden" name="action" value="saveDatabase">
-    <button type="submit"style="padding:10px; margin:5px;">Save to Database</button>
+<form action="ExportPDF" method="get" target="_blank">
+    <button type="submit" style="padding:10px; margin:5px;">Export PDF Report</button>
 </form>
 
 <form action="SaveServlet" method="post">

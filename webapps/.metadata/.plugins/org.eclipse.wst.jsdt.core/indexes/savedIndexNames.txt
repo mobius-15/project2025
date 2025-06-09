@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+C:\pleiades\2024-09\tomcat\10\webapps\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3813299168.index
+2608752469.index
+1182710845.index
+2997397591.index
+2410151403.index
+2447334654.index
+1044471609.index

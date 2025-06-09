@@ -1,0 +1,38 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	display: flex;
+	flex-flow: row;
+	text-align: left;
+}
+
+.job1 {
+	width: 60%;
+	background-color:#00a0e9;
+	color: white;
+	padding: 20px;
+	line-height: 30px;
+}
+
+.job2 {
+	width: 40%;
+	background-color: #d3edfb;
+	color: black;
+	padding: 20px;
+	line-height: 30px;
+}
+
+
+/* ウィンドウの幅が768px以下のとき */
+@media only screen and (max-width:768px) {
+	.container {
+		flex-flow: column;
+	}
+	.job1,
+	.job2 {
+		width: 100%;
+	}
+}

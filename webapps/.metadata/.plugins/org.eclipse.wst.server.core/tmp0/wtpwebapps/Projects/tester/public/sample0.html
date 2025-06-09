@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+<form action ="process_form.php" method="post">
+	
+<div>
+<label for="name">名前：</label>	
+<input id="name" type="text" name="name" placeholder="名前"/>	
+</div>	
+<div>
+<label>性別：</label>
+<label><input type="radio" name="gender" value="male"/>男性</label>
+<label><input type="radio" name="gender" value="female"/>女性</label>	
+</div>
+<div>
+<label for="age">年齢：</label>
+<input id="age" type="number" min="0" max="120" name="age"/>	
+</div>
+<div>
+<label>言語：</label>
+
+<select name="language">
+<option value="en">英語</option>
+<option value="ja">日本語</option>
+<option value="ot">その他</option>			
+</select>	
+
+</div>
+<div>
+	<label for="impression"></label><br/>
+	<textarea id="impression" name="impression" cols="40" rows="4" maxlength="120">	
+	</textarea>	
+</div>
+<div>
+	<input type="submit" value="送信"/>
+</div>
+	
+</form>
+
+</body>
+</html>

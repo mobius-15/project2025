@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p>　Webページを公開するにはWebサーバというコンピュータにHTMLファイルを配置し<br>
+ブラウザを使って要求する。どのWebサーバのどのHTMLファイルを要求するかを<br>
+指定するのに使用されるのがURLである。</p>
+<p>　ブラウザがWebサーバに要求することをリクエストという。リクエストには幾つか<br>
+の方法があり、代表的なものはGETリクエストとPOSTリクエストである。また、<br>
+Webサーバがブラウザのリクエストに応えることをレスポンスといい、応答するデータの<br>
+種類を表すcontent-typeと処理結果を表すステータスコードをヘッダ部を使って送信する。<br>
+このWebサーバとブラウザのやりとりはhttpというプロトコルで決められている。</p>
+<p>　Webアプリケーションはブラウザで実行できるアプリケーションでその中核となるのが<br>
+サーバサイドプログラムである。WebアプリケーションにはWebサーバにサーバサイドプログラム<br>
+を実行する機能（環境）を備えたWebアプリケーションサーバとうコンピュータが必要となる。<br>
+特にJavaによるサーバサイドプログラムをServletといい、Servletを実行できる環境を
+サーブレットコンテナという。</p>
+<p>　JavaによるサーバサイドプログラムにはJSPと呼ばれる技術も存在するが、これは<br>
+Servletに変換され、最終的には同じものとなる。</p>
+<br>
+<p>サーバ名localhost,ポート8080,アプリケーション名"hoge"<br>
+	webappフォルダ直下 ->http://localhost:8080/hoge/foo.html<br>
+	webapp/bar ->		http://localhost:8080/hoge/bar/foo.html</p>
+</body>
+</html>

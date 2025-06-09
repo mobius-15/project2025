@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="sample2.js"></script>
+</head>
+<body>
+<form name="setup" id="setup">
+	<table width="600"  border="1">
+		<caption>機体の設定</caption>
+<tr>
+<td><input type="text" name="aircraft_type" id="aircraft_type" size="20" maxlength="10"/>
+	<br>機種名を入力<br></td>
+	<td><input type="button" onclick="jet_type()" value="PUSH"><br></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="weaponized" onchange="isWeaponized()"><br>武装の有無</td>
+<br><td><input type="checkbox" id="A2A" onchange="isWeaponized()"><br>対空兵装の有無<br></td>
+</tr>
+<tr>
+<td><div id='result'>使用可能な装備</div></td>
+</tr>
+<tr>
+<td><select name="A2AWeapons" id="A2AWeapons" style="display:none;">
+	<option value="AIM-9" >AIM-9X</option>
+	<option value="AIM-120">AIM-120C</option>
+	<option value="AIM-54">AIM-54C(F-14専用)</option>
+	<option value="AIM-7" >AIM-7M（用廃済み）</option>
+</select></td>
+ <td><div id="equipment">兵装</div></td>
+ </tr>
+	</table>
+</form>
+
+</body>
+</html>

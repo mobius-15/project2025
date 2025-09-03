@@ -22,7 +22,7 @@ function updateLoadoutSummary() {
 <body>
 <h2>Configure Loadout for <c:out value="${fa18f.modex}" /></h2>
 
-<form action="LoadoutServlet" method="post" onChange="updateLoadoutSummary()">
+<form action="<c:url value='/LoadoutServlet'/>" method="post" onChange="updateLoadoutSummary()">
 <input type="hidden" name="action" value="loadout_set" />
   <table border="1">
     <tr><th>Station</th><th>Weapon</th><th>Weight (lb)</th><th>Category</th></tr>

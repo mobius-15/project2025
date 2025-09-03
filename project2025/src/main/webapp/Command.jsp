@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="jakarta.tags.core" %>
    <%@ page import="java.util.List,aircrafts.*,mission.*" %>
    <% List<String> missionTypes = (List<String>)request.getAttribute("missionTypes"); %>
    <% String selectedMission = request.getParameter("missionType"); %>
@@ -10,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="TestPlan" method="post">
+<form action="<c:url value='/TestPlan'/>" method="post">
 <input type="hidden" name="action" value="input_wp">
 <p>Mission  Type :</p>
  <select name="missionType" required>

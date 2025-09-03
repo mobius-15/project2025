@@ -31,7 +31,7 @@ FlightPlan2 plan =(FlightPlan2)session.getAttribute("flightplan");%>
     </p>
   </c:if>
   <c:if test="${not empty sessionScope.flightplan and not empty sessionScope.flightplan.waypoints}">
-  <form action="CarrierInfo" method="post">
+  <form action="<c:url value='/CarrierInfo'/>" method="post">
   <input type="hidden" name="carrierName" value="${carrier.name}">
   <input type="hidden" name="lat" value="${carrier.latitude}" />
   <input type="hidden" name="lon" value="${carrier.longitude}" />
@@ -42,7 +42,7 @@ FlightPlan2 plan =(FlightPlan2)session.getAttribute("flightplan");%>
   </form>
 </c:if>
 
-  <form action="TestPlan" method="get">
+  <form action="<c:url value='/TestPlan'/>" method="get">
     <button type="submit">Return to Mission Planning</button>
     <input type="hidden" name="action" value="returned">
   </form>

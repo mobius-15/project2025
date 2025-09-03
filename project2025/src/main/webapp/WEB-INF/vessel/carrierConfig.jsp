@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="CarrierInfo" method="post">
+<form action="<c:url value='/CarrierInfo'/>"  method="post">
 <input type="hidden" name="action" value="confirmMission" />
   <label>Carrier Name:</label>
   <select name="carrierName"><br>

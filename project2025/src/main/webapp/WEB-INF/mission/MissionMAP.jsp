@@ -54,19 +54,23 @@
 }
 </style>
 </head>
+<script
+	src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <body>
-<h2>Mission Map Overview</h2>
+	<h2>Mission Map Overview</h2>
 
-<div class="mode-buttons">
-	<button id="carrier-mode" class="mode-btn active" onclick="setMode('carrier')">Move Carrier</button>
-	<button id="target-mode" class="mode-btn" onclick="setMode('target')">Add Target</button>
-	<span id="current-mode">Current Mode: Move Carrier</span>
-</div>
+	<div class="mode-buttons">
+		<button id="carrier-mode" class="mode-btn active"
+			onclick="setMode('carrier')">Move Carrier</button>
+		<button id="target-mode" class="mode-btn" onclick="setMode('target')">Add
+			Target</button>
+		<span id="current-mode">Current Mode: Move Carrier</span>
+	</div>
 
-<div id="map"></div>
+	<div id="map"></div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script>
 // グローバル変数
 let map;
 let currentMode = 'carrier';
@@ -114,7 +118,9 @@ function initializeMap() {
         } else if (currentMode === 'target') {
             handleTargetAdd(e);
         }
+        
     });
+    
 }
 
 // キャリアマーカー追加
@@ -199,6 +205,11 @@ function handleTargetAdd(e) {
             alert("Target added successfully: " + targetName);
             // リロードの代わりに、ターゲットマーカーを直接追加
             addNewTargetMarker(newTarget);
+            setTimeout(() => {
+                html2canvas(document.getElementById("map")).then(canvas => {
+                    // ...
+                });
+            }, 1000);
         } else {
             alert("Failed to add target: " + (data.message || 'Unknown error'));
         }
@@ -370,16 +381,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
     fitMapBounds();
     setMode('carrier');
+})
+document.addEventListener("keydown", function (event) {
+        if (event.key === "F9") {
+            const mapElement = document.getElementById("map");
+            if (!mapElement) {
+                alert("Map element not found.");
+                return;
+            }
+html2canvas(document.getElementById("map")).then(canvas => {
+    const imgData = canvas.toDataURL("image/png");
+    map.whenReady(() => {
+        html2canvas(document.getElementById("map")).then(canvas => {
+            // 正しく描画された状態をキャプチャ
+        });
+    });
+    
+    fetch("MapServlet", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: imgData })
+    })
+    	.then(res => res.json())
+      	.then(data => {
+          if (data.status === "ok") {
+              alert("Map screenshot saved for export.");
+          } else {
+              alert("Failed to save map image: " + data.message);
+          }
+      })
+      .catch(err => {
+          console.error("Upload error:", err);
+          alert("Upload failed.");
+      });
+  });
+}
 });
 </script>
 
-<p>Leader Latitude: ${ctx.flightPlan.waypoints[0].latitude}, Longitude: ${ctx.flightPlan.waypoints[0].longitude}</p>
-<p>Carrier Latitude: ${ctx.carrier.latitude}, Longitude: ${ctx.carrier.longitude}</p>
+	<p>Leader Latitude: ${ctx.flightPlan.waypoints[0].latitude},
+		Longitude: ${ctx.flightPlan.waypoints[0].longitude}</p>
+	<p>Carrier Latitude: ${ctx.carrier.latitude}, Longitude:
+		${ctx.carrier.longitude}</p>
 
-<form action="CarrierInfo" method="get">
-    <input type="hidden" name="action" value="review">
-    <button type="submit">Back to Review</button>
-</form>
+	<form action="<c:url value='/CarrierInfo'/>" method="get">
+		<input type="hidden" name="action" value="review">
+		<button type="submit">Back to Review</button>
+	</form>
 
 </body>
 </html>

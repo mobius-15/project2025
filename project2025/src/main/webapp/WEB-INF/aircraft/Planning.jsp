@@ -14,9 +14,12 @@
 		Mission:
 		<c:out value="${sessionScope.missionType }" />
 	</h2>
+	<div style="text-align:right; margin: 10px;">
 	<h3>Heading(方位)は画像を参考</h3>
-	<img src="compass0.png"  width="300" height="300" />
-	<form action="TestPlan" method="post">
+	<img src="compass0.png"  style="width:120px;"/>
+	  <p style="font-size: 12px; margin-top: 4px;">Compass: North ↑</p>
+	</div>
+	<form action="<c:url value='/TestPlan'/>" method="post">
 		<c:if test="${not empty inputError}">
 			<p style="color: red;">${inputError}</p>
 		</c:if>

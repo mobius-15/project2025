@@ -60,7 +60,7 @@
     </tr>
   </c:forEach>
 </table>
-<form action="LoadoutServlet" method="get">
+<form action="<c:url value='/LoadoutServlet'/>" method="get">
   <button type="submit">Configure Loadout</button>
 </form>
 <h4>Total Loadout Weight: <fmt:formatNumber value="${fa18f.loadoutWeight}" maxFractionDigits="1" /> lb</h4>
@@ -74,7 +74,7 @@
  <h4>Estimated Landing Weight: <fmt:formatNumber value="${landingWeight}" maxFractionDigits="1" /> lb</h4> 
   <p><strong>Total Flight Time:</strong>
     <fmt:formatNumber value="${ctx.totalFlightTime}" maxFractionDigits="1" /> minutes</p>
-    <form action="CarrierInfo" method="get">
+    <form action="<c:url value='/CarrierInfo'/>" method="get">
   <input type="hidden" name="action" value="map" />
   <button type="submit"style="padding:10px 20px; font-size:16px;">>View on Map</button>
 </form>
@@ -110,15 +110,15 @@
   <tr><td>Landing Weight</td><td><fmt:formatNumber value="${sessionScope.landingWeight}" maxFractionDigits="1" /> lb</td></tr>
   <tr><td>Adjusted Cruise Speed</td><td><c:out value="${sessionScope.adjustedCruiseSpeed}" /> kt</td></tr>
 </table>
-<form action="SaveServlet" method="post">
+<form action="<c:url value='/SaveServlet'/>" method="post">
     <input type="hidden" name="action" value="saveDatabase"/>
     <button type="submit"style="padding:10px; margin:5px;">Save to Database</button>
 </form>
-<form action="ExportPDF" method="get" target="_blank">
+<form action="<c:url value='/ExportPDF'/>" method="get" target="_blank">
     <button type="submit" style="padding:10px; margin:5px;">Export PDF Report</button>
 </form>
 
-<form action="SaveServlet" method="post">
+<form action="<c:url value='/SaveServlet'/>" method="post">
     <input type="hidden" name="action" value="exportJSON">
     <button type="submit"style="padding:10px; margin:5px;">Export JSON</button>
 </form>

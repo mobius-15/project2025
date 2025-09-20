@@ -1,79 +1,25 @@
-## Welcome to Apache Tomcat!
 
-### What Is It?
-
-The Apache Tomcat® software is an open source implementation of the Jakarta
-Servlet, Jakarta Pages, Jakarta Expression Language and Jakarta WebSocket
-technologies. The Jakarta Servlet, Jakarta Server Pages, Jakarta Expression Language and
-Jakarta WebSocket specifications are developed as part of the
-[Jakarta EE Platform](https://jakarta.ee/specifications/).
-
-The Apache Tomcat software is developed in an open and participatory
-environment and released under the
-[Apache License version 2](https://www.apache.org/licenses/). The Apache Tomcat
-project is intended to be a collaboration of the best-of-breed developers from
-around the world. We invite you to participate in this open development
-project. To learn more about getting involved,
-[click here](https://tomcat.apache.org/getinvolved.html) or keep reading.
-
-Apache Tomcat software powers numerous large-scale, mission-critical web
-applications across a diverse range of industries and organizations. Some of
-these users and their stories are listed on the
-[PoweredBy wiki page](https://cwiki.apache.org/confluence/display/TOMCAT/PoweredBy).
-
-Apache Tomcat, Tomcat, Apache, the Apache feather, and the Apache Tomcat
-project logo are trademarks of the Apache Software Foundation.
-
-### Get It
-
-For every major Tomcat version there is one download page containing
-links to the latest binary and source code downloads, but also
-links for browsing the download directories and archives:
-- [Tomcat 11](https://tomcat.apache.org/download-11.cgi)
-- [Tomcat 10](https://tomcat.apache.org/download-10.cgi)
-- [Tomcat 9](https://tomcat.apache.org/download-90.cgi)
-
-To facilitate choosing the right major Tomcat version one, we have provided a
-[version overview page](https://tomcat.apache.org/whichversion.html).
-
-### Documentation
-
-The documentation available as of the date of this release is
-included in the docs webapp which ships with tomcat. You can access that webapp
-by starting tomcat and visiting <http://localhost:8080/docs/> in your browser.
-The most up-to-date documentation for each version can be found at:
-- [Tomcat 11](https://tomcat.apache.org/tomcat-11.0-doc/)
-- [Tomcat 10](https://tomcat.apache.org/tomcat-10.1-doc/)
-- [Tomcat 9](https://tomcat.apache.org/tomcat-9.0-doc/)
-
-### Installation
-
-Please see [RUNNING.txt](RUNNING.txt) for more info.
-
-### Licensing
-
-Please see [LICENSE](LICENSE) for more info.
-
-### Support and Mailing List Information
-
-* Free community support is available through the
-[tomcat-users](https://tomcat.apache.org/lists.html#tomcat-users) email list and
-a dedicated [IRC channel](https://tomcat.apache.org/irc.html) (#tomcat on
-Freenode).
-
-* If you want freely available support for running Apache Tomcat, please see the
-resources page [here](https://tomcat.apache.org/findhelp.html).
-
-* If you want to be informed about new code releases, bug fixes,
-security fixes, general news and information about Apache Tomcat, please
-subscribe to the
-[tomcat-announce](https://tomcat.apache.org/lists.html#tomcat-announce) email
-list.
-
-* If you have a concrete bug report for Apache Tomcat, please see the
-instructions for reporting a bug
-[here](https://tomcat.apache.org/bugreport.html).
-
-### Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for more info.
+Java(Servlet)で開発したフライトプラン作成システム。<br>
+高度(feet)速度(knot)距離(nm)方位(°)を入力して作成。<br>
+速度はCASで入力し、データベースに格納した標準大気表を用いてTASに変換する想定だが<br>
+データベースを公開していないため、変換はここでは出来ない。（データは下記）<br>
+https://github.com/mobius-15/DataBases<br>
+そのため、本来と違う数値が算出される。<br>
+AircraftLogic,FuelLogicで到達時間や燃料消費量を算出。<br>
+テストデータは以下。<br>
+種別：CAP,WP数:6<br>
+WP1(200ft,200kt,5nm,180°)<br>
+WP2(5000ft,280kt,10nm,90°)<br>
+WP3(25000ft,330kt,100nm,110°)<br>
+WP4(30000ft,250kt,12nm,150°)<br>
+WP5(25000ft,330kt,100nm,290°)<br>
+WP6(2500ft,260kt,15nm,320°)<br>
+セッションスコープで総合的なデータの保持を行うため、MissionContextクラスを用意。<br>
+母艦(拠点)情報を入力する事で、初期位置を設定する。<br>
+艦名：任意,lat:19.18,lon:134.13,displacement:100500(t)<br>
+WEB-INF/mission/MissionReview.jspで情報を総合して表示。<br>
+PDF出力、DB保存（ここでは不可）、JSON出力も可能にしている。<br>
+WEB-INF/mission/MissionMAP.jspでフライトプランと母艦情報をleaflet地図で表示する。<br>
+ここはJavaScriptで記述。<br>
+モード切替で母艦の位置変更とターゲット選定を、それぞれ地図上でクリックして行える。<br>
+ターゲット選定後、MissionReview.jspに再遷移するとターゲット情報も表示される。<br>
